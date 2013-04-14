@@ -13,7 +13,10 @@ $supported_methods = array(
 	"ASCII to BIN" => 3,
 	"BIN to ASCII" => 4,
 	"BIN to HEX" => 5,
-	"HEX to BIN" => 6
+	"HEX to BIN" => 6,
+	"BASE64 Encode" => 7,
+	"BASE64 Decode" => 8,
+	"Backwards" => 9,
 	);
 
 foreach (hash_algos() as $n => $hash) {
@@ -29,12 +32,21 @@ foreach (hash_algos() as $n => $hash) {
 </head>
 <div id="container">
 	<form method="post">
-		<div id="aside">
-			<textarea name="Data" id="Data"></textarea>
+		<div class="aside">
+			<textarea name="Data" id="Data"><?php
+
+			if( isset($_POST['submit']) && isset($_POST['Data'])) {
+				$text = $_POST['Data'];	
+				$text = urldecode( stripslashes( $text) );
+				echo htmlentities( $text );
+			}
+
+			?></textarea>
 			<div id="result">
 				<div id="res_text">
+					<ol>
 					<?php 
-					if( isset($_POST['submit']) ) {
+					if( isset($_POST['submit']) && isset($_POST['Data'])) {
 						$eleccion = $_POST['cryptmethod'];
 						settype( $eleccion, "integer" );
 						$text = $_POST['Data'];	
@@ -61,6 +73,15 @@ foreach (hash_algos() as $n => $hash) {
 									case 6:
 										$text = hex2binary($text);
 										break;
+									case 7:
+										$text = base64_encode($text);
+										break;
+									case 8:
+										$text = base64_decode( str_replace(" ", "", $text ) );
+										break;
+									case 9:
+										$text = strrev( $text );
+										break;
 									default:
 										if($eleccion > count($supported_methods) - count(hash_algos()))
 										{
@@ -71,13 +92,20 @@ foreach (hash_algos() as $n => $hash) {
 						}else{
 							$text = "Encriptacion no soportada.";
 						}       	
-						echo htmlentities($text);
+						echo text2list(htmlentities($text));
 					}
 					?>
+					</ol>
+				</div>
+			</div>
+			<div id="footer_aside">
+				<div id="icons">
+					<a href="" title="Change"><img id="upicon" src="./images/t.gif"></a>
+					<a href="" title="Copy to clipboard"><img id="copyicon" src="./images/t.gif"></a>
 				</div>
 			</div>
 		</div>
-		<div id="bside">
+		<div class="bside">
 			<select name="cryptmethod" id="cryptmethod" autofocus>
 				<?php
 					$eleccion = $_POST['cryptmethod'];

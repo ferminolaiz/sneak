@@ -1,4 +1,12 @@
 <?php
+
+	function text2list($text) {
+		$string = "";
+		foreach (explode(PHP_EOL, $text) as $line ) {
+			$string .= "<li>".$line."</li>";
+		}
+		return $string;
+	}
 	function asc2hex($str) {
 		return chunk_split(bin2hex($str), 2, " ");
 	}

@@ -6,7 +6,7 @@
  ************************************************************************/
 $version = 1.0;
 
-require( dirname(__FILE__) . '/lib.php');
+require( dirname(__FILE__) . '/src/lib.php');
 $supported_methods = array( 
 	"ASCII to HEX" => 1,
 	"HEX to ASCII" => 2,
@@ -32,10 +32,10 @@ foreach (hash_algos() as $n => $hash) {
 <head>
 	<title>Hasher</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="./css.css" rel="stylesheet" type="text/css" />
+	<link href="./src/style.css" rel="stylesheet" type="text/css" />
 </head>
-<script src="./ZeroClipboard-1.1.7/ZeroClipboard.js" type="text/javascript"></script>
-<script src="./main.js" type="text/javascript"></script>
+<script src="./src/ZeroClipboard-1.1.7/ZeroClipboard.js" type="text/javascript"></script>
+<script src="./src/main.js" type="text/javascript"></script>
 <div id="container">
 	<form method="post">
 		<div class="aside">
@@ -116,9 +116,9 @@ foreach (hash_algos() as $n => $hash) {
 			</div>
 			<div id="footer_aside">
 				<div id="icons">
-					<a onclick="togglev()" title="No margins" ><img id="marginicon" src="./images/t.gif"></a>
-					<a onclick="document.getElementsByName('Data')[0].innerHTML = contenido_res();" title="Send up"><img id="upicon" src="./images/t.gif"></a>
-					<a href="" title="Copy to clipboard" id="copy-button" ><img id="copyicon" src="./images/t.gif"></a>
+					<a onclick="togglev()" title="No margins" ><img id="marginicon" src="./src/images/t.gif"></a>
+					<a onclick="document.getElementsByName('Data')[0].innerHTML = contenido_res();" title="Send up"><img id="upicon" src="./src/images/t.gif"></a>
+					<a href="" title="Copy to clipboard" id="copy-button" ><img id="copyicon" src="./src/images/t.gif"></a>
 				</div>
 			</div>
 		</div>
@@ -160,7 +160,7 @@ foreach (hash_algos() as $n => $hash) {
 <script type="text/javascript">
 
 var clip = new ZeroClipboard(document.getElementById("copy-button"), {
-  moviePath: "./ZeroClipboard-1.1.7/ZeroClipboard.swf"
+  moviePath: "./src/ZeroClipboard-1.1.7/ZeroClipboard.swf"
 } );
 
 clip.on( 'complete', function(client, args) {
@@ -169,6 +169,7 @@ clip.on( 'complete', function(client, args) {
 clip.on( 'dataRequested', function ( client, args ) {
   clip.setText( contenido_res() );
 } );
+
 </script>
 
 </body>

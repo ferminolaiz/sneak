@@ -17,6 +17,10 @@ $supported_methods = array(
 	"BASE64 Encode" => 7,
 	"BASE64 Decode" => 8,
 	"Backwards" => 9,
+	"ASCII to ASCII CODE" => 10,
+	"ASCII CODE to ASCII" => 11,
+	"ASCII to SQL CHAR()" => 12,
+	"ASCII to String.fromCharCode()" => 13
 	);
 
 foreach (hash_algos() as $n => $hash) {
@@ -30,6 +34,8 @@ foreach (hash_algos() as $n => $hash) {
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="./css.css" rel="stylesheet" type="text/css" />
 </head>
+<script src="./ZeroClipboard-1.1.7/ZeroClipboard.js" type="text/javascript"></script>
+<script src="./main.js" type="text/javascript"></script>
 <div id="container">
 	<form method="post">
 		<div class="aside">
@@ -43,9 +49,8 @@ foreach (hash_algos() as $n => $hash) {
 
 			?></textarea>
 			<div id="result">
-				<div id="res_text">
-					<ol>
-					<?php 
+				<div id="res_text" name="res_text">
+					<ol><?php 
 					if( isset($_POST['submit']) && isset($_POST['Data'])) {
 						$eleccion = $_POST['cryptmethod'];
 						settype( $eleccion, "integer" );
@@ -82,6 +87,18 @@ foreach (hash_algos() as $n => $hash) {
 									case 9:
 										$text = strrev( $text );
 										break;
+									case 10:
+										$text = ascii2asciicode($text);
+										break;
+									case 11:
+										$text = asciicode2ascii($text);
+										break;
+									case 12:
+										$text = ascii2mysql($text);
+										break;
+									case 13:
+										$text = ascii2fromcharcode($text);
+										break;
 									default:
 										if($eleccion > count($supported_methods) - count(hash_algos()))
 										{
@@ -94,14 +111,14 @@ foreach (hash_algos() as $n => $hash) {
 						}       	
 						echo text2list(htmlentities($text));
 					}
-					?>
-					</ol>
+					?></ol>
 				</div>
 			</div>
 			<div id="footer_aside">
 				<div id="icons">
-					<a href="" title="Change"><img id="upicon" src="./images/t.gif"></a>
-					<a href="" title="Copy to clipboard"><img id="copyicon" src="./images/t.gif"></a>
+					<a onclick="togglev()" title="No margins" ><img id="marginicon" src="./images/t.gif"></a>
+					<a onclick="document.getElementsByName('Data')[0].innerHTML = contenido_res();" title="Send up"><img id="upicon" src="./images/t.gif"></a>
+					<a href="" title="Copy to clipboard" id="copy-button" ><img id="copyicon" src="./images/t.gif"></a>
 				</div>
 			</div>
 		</div>
@@ -127,7 +144,7 @@ foreach (hash_algos() as $n => $hash) {
 				</optgroup>
 			</select>
 			<input type="submit" name="submit" value="OK" />
-			<input type="reset" value="Clear" onclick="document.Data.value=''"/>
+			<input type="reset" value="Clear" onclick="document.getElementsByName('Data')[0].innerHTML = '';"/>
 		</div>
 		<div id="footer">
 			<p>
@@ -140,8 +157,19 @@ foreach (hash_algos() as $n => $hash) {
 		</div>
 	</form>
 </div>
+<script type="text/javascript">
 
-<body>
+var clip = new ZeroClipboard(document.getElementById("copy-button"), {
+  moviePath: "./ZeroClipboard-1.1.7/ZeroClipboard.swf"
+} );
+
+clip.on( 'complete', function(client, args) {
+  alert("Copied text to clipboard");
+} );
+clip.on( 'dataRequested', function ( client, args ) {
+  clip.setText( contenido_res() );
+} );
+</script>
 
 </body>
 </html>

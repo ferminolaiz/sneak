@@ -3,12 +3,12 @@
 	function text2list($text) {
 		$string = "";
 		foreach (explode(PHP_EOL, $text) as $line ) {
-			$string .= "<li>".$line."</li>";
+			$string .= "<li class=\"li1\"><span class=\"de1\">".$line."</span></li>";
 		}
 		return $string;
 	}
 	function asc2hex($str) {
-		return chunk_split(bin2hex($str), 2, " ");
+		return trim(chunk_split(bin2hex($str), 2, " "));
 	}
 
 	function hex2asc($str) {
@@ -26,7 +26,7 @@
 			$newstring .= substr("0000".base_convert(ord($text_array[$n]), 10, 2), -8);
 		}
 		$newstring = chunk_split($newstring, 8, " ");
-		return $newstring;
+		return trim($newstring);
 	}
 
 	function bin2asc($str) {
@@ -57,6 +57,32 @@
 			$newstring .= substr("0000".base_convert($text_array[$n], 16, 2), -8);
 		}
 		$newstring = chunk_split($newstring, 8, " ");
+		return $newstring;
+	}
+	function ascii2asciicode($text)
+	{
+		$newstring = "";
+		for ($i=0; $i < strlen($text); $i++) { 
+			$newstring .= ord($text[$i])." ";
+		}
+		return trim($newstring);
+	}
+	function asciicode2ascii($text)
+	{
+		$newstring = "";
+		$numeros = explode(" ", $text);
+		foreach ($numeros as $numero) {
+			$newstring .= chr($numero);
+		}
+		return $newstring;
+	}
+	function ascii2mysql($text) {
+		$newstring = "CHAR(".str_replace(" ", ",", ascii2asciicode($text)).")";
+		return $newstring;
+	}
+	function ascii2fromcharcode($text)
+	{
+		$newstring = "String.fromCharCode(".str_replace(" ", ",", ascii2asciicode($text)).")";
 		return $newstring;
 	}
 ?>

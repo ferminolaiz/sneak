@@ -1,6 +1,8 @@
 #container {
 	width: 750px;
 	font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,monospace,serif;
+	margin-left: auto;
+	margin-right: auto;
 }
 #Data {
 	width: 100%;
@@ -22,7 +24,8 @@
 #res_text {
 	line-height: 21px;
 	font-size: 12px;
-	padding: 5px;	
+	padding: 0px;
+	padding-bottom: 5px;
 }
 .aside {
 	float:left;
@@ -56,7 +59,7 @@
 {
 	height: 16px;
 	width: 16px;
-	background: url("images/stock_mail-send-receive.png") no-repeat scroll transparent;
+	background: url("images/gtk-go-up.png") no-repeat scroll transparent;
 }
 #copyicon
 {
@@ -66,7 +69,25 @@
 	/* http://www.iconfinder.com/icondetails/20618/16/copy_icon */
 	/* Uso Gnome icons */
 }
+#marginicon
+{
+	height: 16px;
+	width: 16px;
+	background: url("images/format-indent-more.png") no-repeat scroll transparent;
+}
 #icons{
 	margin-top: 7px;
 	margin-right: 10px;
+}
+.li1 {
+	line-height: 16px;
+	color: rgb(154, 154, 154);
+	margin: 0px;
+}
+.de1 {
+	margin: 0px;
+	color: rgb(0, 0, 0);
+	padding-left: 5px;
+	padding-right: 5px;
+	border-left: 1px solid rgb(204, 204, 204);
 }

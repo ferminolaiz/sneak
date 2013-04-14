@@ -1,16 +1,16 @@
-Hasher
+Sneak
 ======
 
-Basado en [Sneak], un script sencillo para encoding y hashing. 
+Basado en [Sneak], un script sencillo para codificacion y hashing. 
 
 **Web del proyecto**: [Codigo fuente][Source Code].
 
 Los iconos usados son del set [Gnome Icons] bajo licencia GPL. 
 
-# Author
+# Autor
 
 ## Isseu 
-* Website: [isseu.com]  
+* Sitio web: [isseu.com]  
 * Twitter: [@isseu]  
  
 [Gnome Icons]: http://art.gnome.org/themes/icon

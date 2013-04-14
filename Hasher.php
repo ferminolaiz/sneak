@@ -6,10 +6,19 @@
  ************************************************************************/
 $version = 1.0;
 
-@require( dirname(__FILE__) . '/lib.php');
+require( dirname(__FILE__) . '/lib.php');
 $supported_methods = array( 
-	"ASCII to HEX" => 1
+	"ASCII to HEX" => 1,
+	"HEX to ASCII" => 2,
+	"ASCII to BIN" => 3,
+	"BIN to ASCII" => 4,
+	"BIN to HEX" => 5,
+	"HEX to BIN" => 6
 	);
+
+foreach (hash_algos() as $n => $hash) {
+	$supported_methods[strtoupper($hash)] = count($supported_methods) + 1;
+}
 
 ?>
 <html>
@@ -26,23 +35,41 @@ $supported_methods = array(
 				<div id="res_text">
 					<?php 
 					if( isset($_POST['submit']) ) {
-
+						$eleccion = $_POST['cryptmethod'];
+						settype( $eleccion, "integer" );
 						$text = $_POST['Data'];	
-						$text = urldecode(stripslashes($text));
-						$orig_text = htmlentities($text);
+						$text = urldecode( stripslashes( $text) );
+						$orig_text = htmlentities( $text );
 						$algs = hash_algos();
-						if(in_array($_POST['cryptmethod'], $supported_methods)){
-							switch ($_POST['cryptmethod']) {
+						if(in_array($eleccion, $supported_methods)){
+							switch ($eleccion) {
 									case 1:
 										$text = asc2hex($text);
 										break;
-									
+									case 2:
+										$text = hex2asc($text);
+										break;
+									case 3:
+										$text = asc2bin($text);
+										break;
+									case 4:
+										$text = bin2asc($text);
+										break;
+									case 5:
+										$text = binary2hex($text);
+										break;
+									case 6:
+										$text = hex2binary($text);
+										break;
 									default:
-										# code...
+										if($eleccion > count($supported_methods) - count(hash_algos()))
+										{
+											$text = hash(strtolower(array_keys($supported_methods)[$eleccion - 1]), $text);
+										}
 										break;
 								}	
 						}else{
-							$text = "Encriptacion no Soportada.";
+							$text = "Encriptacion no soportada.";
 						}       	
 						echo htmlentities($text);
 					}
@@ -51,12 +78,25 @@ $supported_methods = array(
 			</div>
 		</div>
 		<div id="bside">
-			<select name="cryptmethod" id="cryptmethod">
+			<select name="cryptmethod" id="cryptmethod" autofocus>
 				<?php
-				foreach ($supported_methods as $encript => $val) {
-					echo "<option value='".$val."'>".$encript."</option>";
+					$eleccion = $_POST['cryptmethod'];
+					settype( $eleccion, "integer" );
+				?>
+				<optgroup label="Encoding">
+				<?php
+				for ( $i = 0 ; $i < count($supported_methods) - count(hash_algos()); $i++ ) { 
+					echo "<option ".(($eleccion == $i + 1)?"selected ":"")."value='".($i + 1)."'>".array_keys($supported_methods)[$i]."</option>";
 				}
 				?>
+				</optgroup>
+				<optgroup label="Hashing">
+				<?php
+				for ( $i = count($supported_methods) - count(hash_algos()) ; $i < count($supported_methods); $i++ ) { 
+					echo "<option ".(($eleccion == $i + 1)?"selected ":"")."value='".($i + 1)."'>".array_keys($supported_methods)[$i]."</option>";
+				}
+				?>
+				</optgroup>
 			</select>
 			<input type="submit" name="submit" value="OK" />
 			<input type="reset" value="Clear" onclick="document.Data.value=''"/>

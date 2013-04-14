@@ -7,12 +7,13 @@ Basado en [Sneak], un script sencillo para encoding y hashing.
 
 # Author
 
+Uso 'Gnome icons set'
+
 ## Isseu 
 * Website: [isseu.com]  
 * Twitter: [@isseu]  
  
 [Sneak]: http://snarkles.net/scripts/sneak/sneak.php
 [Source Code]: https://github.com/isseu/Sneak
-[JSON]: http://code.google.com/p/json-simple/ 
 [isseu.com]: http://www.isseu.com
 [@isseu]: http://twitter.com/isseu

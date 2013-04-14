@@ -20,7 +20,10 @@ $supported_methods = array(
 	"ASCII to ASCII CODE" => 10,
 	"ASCII CODE to ASCII" => 11,
 	"ASCII to SQL CHAR()" => 12,
-	"ASCII to String.fromCharCode()" => 13
+	"ASCII to String.fromCharCode()" => 13,
+	"URLEncode" => 14,
+	"URLDecode" => 15,
+	"l33t Encode" => 16,
 	);
 
 foreach (hash_algos() as $n => $hash) {
@@ -98,6 +101,15 @@ foreach (hash_algos() as $n => $hash) {
 										break;
 									case 13:
 										$text = ascii2fromcharcode($text);
+										break;
+									case 14:
+										$text = urlencode($text);
+										break;
+									case 15:
+										$text = urldecode($text);
+										break;
+									case 16:
+										$text = leetencode($text);
 										break;
 									default:
 										if($eleccion > count($supported_methods) - count(hash_algos()))

@@ -30,6 +30,8 @@ foreach (hash_algos() as $n => $hash) {
 	$supported_methods[strtoupper($hash)] = count($supported_methods) + 1;
 }
 
+$keys = array_keys($supported_methods);
+
 ?>
 <html>
 <head>
@@ -37,8 +39,8 @@ foreach (hash_algos() as $n => $hash) {
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="./src/style.css" rel="stylesheet" type="text/css" />
 </head>
-<script src="./src/ZeroClipboard-1.1.7/ZeroClipboard.js" type="text/javascript"></script>
-<script src="./src/main.js" type="text/javascript"></script>
+<script type="text/javascript" src="./src/ZeroClipboard-1.1.7/ZeroClipboard.js"></script>
+<script type="text/javascript" src="./src/main.js"></script>
 <div id="container">
 	<form method="post">
 		<div class="aside">
@@ -114,7 +116,7 @@ foreach (hash_algos() as $n => $hash) {
 									default:
 										if($eleccion > count($supported_methods) - count(hash_algos()))
 										{
-											$text = hash(strtolower(array_keys($supported_methods)[$eleccion - 1]), $text);
+											$text = hash(strtolower($keys[$eleccion - 1]), $text);
 										}
 										break;
 								}	
@@ -128,9 +130,9 @@ foreach (hash_algos() as $n => $hash) {
 			</div>
 			<div id="footer_aside">
 				<div id="icons">
-					<a onclick="togglev()" title="No margins" ><img id="marginicon" src="./src/images/t.gif"></a>
-					<a onclick="document.getElementsByName('Data')[0].innerHTML = contenido_res();" title="Send up"><img id="upicon" src="./src/images/t.gif"></a>
-					<a href="" title="Copy to clipboard" id="copy-button" ><img id="copyicon" src="./src/images/t.gif"></a>
+					<a id="hover" onclick="togglev()" title="No margins" ><img id="marginicon" src="./src/images/t.gif"></a>
+					<a id="hover" onclick="document.getElementsByName('Data')[0].innerHTML = contenido_res();" title="Send up"><img id="upicon" src="./src/images/t.gif"></a>
+					<a title="Copy to clipboard" id="copy-button" ><img id="copyicon" src="./src/images/t.gif"></a>
 				</div>
 			</div>
 		</div>
@@ -143,14 +145,14 @@ foreach (hash_algos() as $n => $hash) {
 				<optgroup label="Encoding">
 				<?php
 				for ( $i = 0 ; $i < count($supported_methods) - count(hash_algos()); $i++ ) { 
-					echo "<option ".(($eleccion == $i + 1)?"selected ":"")."value='".($i + 1)."'>".array_keys($supported_methods)[$i]."</option>";
+					echo "<option ".(($eleccion == $i + 1)?"selected ":"")."value='".($i + 1)."'>".$keys[$i]."</option>";
 				}
 				?>
 				</optgroup>
 				<optgroup label="Hashing">
 				<?php
 				for ( $i = count($supported_methods) - count(hash_algos()) ; $i < count($supported_methods); $i++ ) { 
-					echo "<option ".(($eleccion == $i + 1)?"selected ":"")."value='".($i + 1)."'>".array_keys($supported_methods)[$i]."</option>";
+					echo "<option ".(($eleccion == $i + 1)?"selected ":"")."value='".($i + 1)."'>".$keys[$i]."</option>";
 				}
 				?>
 				</optgroup>

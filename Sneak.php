@@ -6,6 +6,8 @@
  ************************************************************************/
 $version = 1.0;
 
+header('Content-Type: text/html; charset=UTF-8'); // Solo UTF-8!
+
 require( dirname(__FILE__) . '/src/lib.php');
 $supported_methods = array( 
 	"ASCII to HEX" => 1,
@@ -42,7 +44,7 @@ $keys = array_keys($supported_methods);
 <script type="text/javascript" src="./src/ZeroClipboard-1.1.7/ZeroClipboard.js"></script>
 <script type="text/javascript" src="./src/main.js"></script>
 <div id="container">
-	<form method="post">
+	<form method="post" accept-charset="UTF-8">
 		<div class="aside">
 			<textarea name="Data" id="Data"><?php
 

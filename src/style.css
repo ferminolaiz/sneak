@@ -1,9 +1,22 @@
+
+* {
+    border: 0px none;  
+    font-family:inherit;  
+    font-size: 100%;  
+    font-style:inherit;  
+    font-weight:inherit;  
+    margin:0px;  
+    padding:0px;  
+    vertical-align:baseline;  
+}
+
 #container {
 	width: 750px;
 	font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,monospace,serif;
 	margin-left: auto;
 	margin-right: auto;
 }
+
 #Data {
 	width: 100%;
 	height: 250px;
@@ -11,6 +24,7 @@
 	border: 1px solid rgb(221, 221, 221);
 	padding: 5px;
 }
+
 #result {
 	width: 100%;
 	min-height: 250px;
@@ -21,33 +35,51 @@
 	border-left: 1px solid rgb(204, 204, 204);
 	border-right: 1px solid rgb(204, 204, 204);
 }
+
 #res_text {
 	line-height: 21px;
 	font-size: 12px;
 	padding: 0px;
 	padding-bottom: 5px;
 }
+
 .aside {
 	float:left;
 	width: 70%;
 }
+
 .bside {
 	width: 30%;
 	float:right;
 	text-align:center;
+	margin-top: 20px;
 }
+
 #footer
 {	
 	display: block;
 	width:100%;
 	float:left;
 	text-align:center;
+	font-size: .8em;
+	margin-bottom: 5px;
+	margin-top: 5px;
 }
-#cryptmethod
-{
-	width: 100%;
-	margin: 5px;
+
+.sneak_contenedor_select select {
+  color: #000000;
+  background-color: transparent;
+  border: 0 none;
+  padding: 5px;
 }
+.sneak_contenedor_select { 
+   overflow: hidden;
+   border-radius: 3px;    
+   border: 1px solid rgb(204, 204, 204); 
+   background: url("images/gtk-go-down.png") no-repeat 97% center rgb(248, 248, 248);;
+   margin: 5px;
+}
+
 #footer_aside{
 	width: 100%;
 	height: 30px;
@@ -55,12 +87,14 @@
 	border: 1px solid rgb(204, 204, 204);
 	text-align: right;
 }
+
 #upicon
 {
 	height: 16px;
 	width: 16px;
 	background: url("images/gtk-go-up.png") no-repeat scroll transparent;
 }
+
 #copyicon
 {
 	height: 16px;
@@ -75,15 +109,22 @@
 	width: 16px;
 	background: url("images/format-indent-more.png") no-repeat scroll transparent;
 }
+
+#sneak_lista{
+	padding-left: 40px;
+}
+
 #icons{
 	margin-top: 7px;
 	margin-right: 10px;
 }
+
 .li1 {
 	line-height: 16px;
 	color: rgb(154, 154, 154);
 	margin: 0px;
 }
+
 .de1 {
 	margin: 0px;
 	color: rgb(0, 0, 0);
@@ -91,6 +132,23 @@
 	padding-right: 5px;
 	border-left: 1px solid rgb(204, 204, 204);
 }
+
 #hover:hover{
 	cursor: pointer;
+}
+
+.sneak_btn{    
+	color: rgb(0, 0, 0);
+    font: 12px "Trebuchet MS",Arial,Helvetica,sans-serif;
+    margin-left: 0px;
+    padding: 3px 15px;
+    border: 1px solid rgb(204, 204, 204);
+    background: url("images/code_bg.png") repeat scroll 0% 0% ;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.sneak_btn:hover {
+	opacity:0.6;
+	filter:alpha(opacity=60); /* For IE8 and earlier */
 }

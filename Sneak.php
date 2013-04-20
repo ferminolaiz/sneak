@@ -6,8 +6,6 @@
  ************************************************************************/
 $version = 1.0;
 
-header('Content-Type: text/html; charset=UTF-8'); // Solo UTF-8!
-
 require( dirname(__FILE__) . '/src/lib.php');
 $supported_methods = array( 
 	"ASCII to HEX" => 1,
@@ -57,7 +55,7 @@ $keys = array_keys($supported_methods);
 			?></textarea>
 			<div id="result">
 				<div id="res_text" name="res_text">
-					<ol><?php 
+					<ol id="sneak_lista"><?php 
 					if( isset($_POST['submit']) && isset($_POST['Data'])) {
 						$eleccion = $_POST['cryptmethod'];
 						settype( $eleccion, "integer" );
@@ -139,28 +137,30 @@ $keys = array_keys($supported_methods);
 			</div>
 		</div>
 		<div class="bside">
-			<select name="cryptmethod" id="cryptmethod" autofocus>
-				<?php
-					$eleccion = $_POST['cryptmethod'];
-					settype( $eleccion, "integer" );
-				?>
-				<optgroup label="Encoding">
-				<?php
-				for ( $i = 0 ; $i < count($supported_methods) - count(hash_algos()); $i++ ) { 
-					echo "<option ".(($eleccion == $i + 1)?"selected ":"")."value='".($i + 1)."'>".$keys[$i]."</option>";
-				}
-				?>
-				</optgroup>
-				<optgroup label="Hashing">
-				<?php
-				for ( $i = count($supported_methods) - count(hash_algos()) ; $i < count($supported_methods); $i++ ) { 
-					echo "<option ".(($eleccion == $i + 1)?"selected ":"")."value='".($i + 1)."'>".$keys[$i]."</option>";
-				}
-				?>
-				</optgroup>
-			</select>
-			<input type="submit" name="submit" value="OK" />
-			<input type="reset" value="Clear" onclick="document.getElementsByName('Data')[0].innerHTML = '';"/>
+			<div class="sneak_contenedor_select">
+				<select name="cryptmethod" id="cryptmethod" autofocus>
+					<?php
+						$eleccion = $_POST['cryptmethod'];
+						settype( $eleccion, "integer" );
+					?>
+					<optgroup label="Encoding">
+					<?php
+					for ( $i = 0 ; $i < count($supported_methods) - count(hash_algos()); $i++ ) { 
+						echo "<option ".(($eleccion == $i + 1)?"selected ":"")."value='".($i + 1)."'>".$keys[$i]."</option>";
+					}
+					?>
+					</optgroup>
+					<optgroup label="Hashing">
+					<?php
+					for ( $i = count($supported_methods) - count(hash_algos()) ; $i < count($supported_methods); $i++ ) { 
+						echo "<option ".(($eleccion == $i + 1)?"selected ":"")."value='".($i + 1)."'>".$keys[$i]."</option>";
+					}
+					?>
+					</optgroup>
+				</select>
+			</div>
+			<input type="submit" name="submit" class="sneak_btn" value="OK" />
+			<input type="reset" value="Clear" class="sneak_btn" onclick="document.getElementsByName('Data')[0].innerHTML = '';"/>
 		</div>
 		<div id="footer">
 			<p>

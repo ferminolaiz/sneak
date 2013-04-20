@@ -42,6 +42,7 @@ $keys = array_keys($supported_methods);
 <script type="text/javascript" src="./src/ZeroClipboard-1.1.7/ZeroClipboard.js"></script>
 <script type="text/javascript" src="./src/main.js"></script>
 <div id="container">
+	<div id="sneak_titulo">Sneak</div>
 	<form method="post" accept-charset="UTF-8">
 		<div class="aside">
 			<textarea name="Data" id="Data"><?php
@@ -53,7 +54,7 @@ $keys = array_keys($supported_methods);
 			}
 
 			?></textarea>
-			<div id="result">
+			<div id="sneak_result">
 				<div id="res_text" name="res_text">
 					<ol id="sneak_lista"><?php 
 					if( isset($_POST['submit']) && isset($_POST['Data'])) {

@@ -10,6 +10,11 @@
     vertical-align:baseline;  
 }
 
+#sneak_titulo
+{
+	font-size: 2em;
+}
+
 #container {
 	width: 750px;
 	font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,monospace,serif;
@@ -22,10 +27,13 @@
 	height: 250px;
 	resize: vertical;
 	border: 1px solid rgb(221, 221, 221);
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	padding: 5px;
 }
 
-#result {
+#sneak_result {
 	width: 100%;
 	min-height: 250px;
 	background-color: rgb(248, 248, 248);
